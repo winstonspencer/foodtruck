@@ -4,7 +4,7 @@
 <head>
     <img src="Images/FoodTruckLogo.gif" alt="Description of image" width="200" height="200">
     <title>
-        <h1>Abuleita's Food Truck - Contact Us</h1>
+        Abuleita's Food Truck - Contact Us
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
@@ -22,6 +22,19 @@
             resize: vertical;
         }
         
+        input[type=checkbox],
+        input[type=radio] {
+            border: 1px solid #ccc;
+            resize: horizontal;
+            width: 2%;
+            padding: 1px;
+        }
+        
+        input[type=number] {
+            width: 25%;
+            background-color: #b0cdff;
+        }
+        
         label {
             padding: 12px 12px 12px 0;
             display: inline-block;
@@ -31,14 +44,29 @@
             background-color: #04AA6D;
             color: white;
             padding: 12px 20px;
-            border: none;
+            border: 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+            margin-left: 30px;
+        }
+        
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+        
+        input[type=reset] {
+            background-color: #ff9191;
+            color: white;
+            padding: 12px 20px;
+            border: 12px;
             border-radius: 4px;
             cursor: pointer;
             float: right;
         }
         
         input[type=submit]:hover {
-            background-color: #45a049;
+            background-color: #eb4d38;
         }
         
         .container {
@@ -75,22 +103,39 @@
                 margin-top: 0;
             }
         }
+        
+        .error {
+            background-color: #ffb0b0;
+        }
     </style>
+
 </head>
 
 <body>
     <header></header>
     <nav></nav>
     <main>
-        <h2> Tell Us What You Think</h2>
 
+        <h2> Tell Us What You Think</h2>
         <form action="/action_page.php">
+
+            <div class="row">
+                <div class="col-25">
+                    <label for="fname">Contact Reason</label>
+                </div>
+                <div class="col-75">
+                    <input type="checkbox" id="orderOnline" name="orderOnline" value="Order Online"> <label for="orderOnline"> Order Online</label>
+                    <input type="checkbox" id="pickup" name="pickup" value="Pickup"> <label for="pickup"> Pickup</label>
+                    <input type="checkbox" id="reservations" name="reservations" value="Boat"> <label for="reservations"> Reservations</label>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-25">
                     <label for="fname">First Name</label>
                 </div>
                 <div class="col-75">
-                    <input type="text" id="fname" name="firstname" placeholder="Your name..">
+                    <input type="text" id="fname" name="firstname" required placeholder="Your name..">
                 </div>
             </div>
             <div class="row">
@@ -98,7 +143,39 @@
                     <label for="lname">Last Name</label>
                 </div>
                 <div class="col-75">
-                    <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+                    <input type="text" id="lname" name="lastname" required placeholder="Your last name..">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-25">
+                    <label for="country">Country</label>
+                </div>
+                <div class="col-75">
+                    <select id="country" name="country">
+                        <option value="australia">Australia</option>
+                        <option value="canada">Canada</option>
+                        <option selected value="usa">USA</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-25">
+                    <label for="preferredContact">Preferred contact method </label>
+                </div>
+                <div class="col-75">
+                    <input type="radio" id="phone" name="preferredContact" value="Phone"> <label for="phone">Phone</label>
+                    <input type="radio" id="sms" name="preferredContact" value="CSS"> <label for="sms">SMS</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-25">
+                    <label for="eaddress">Email Address</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="eaddress" name="emailaddress" required placeholder="Your email address..">
                 </div>
             </div>
             <div class="row">
@@ -111,33 +188,55 @@
             </div>
             <div class="row">
                 <div class="col-25">
-                    <label for="country">Country</label>
-                </div>
-                <div class="col-75">
-                    <select id="country" name="country">
-                <option value="australia">Australia</option>
-                <option value="canada">Canada</option>
-                <option value="usa">USA</option>
-              </select>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
                     <label for="subject">Subject</label>
                 </div>
                 <div class="col-75">
                     <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-25">
+                    <label for="subject">Enter your four-digit passcode, then click OK</label>
+                </div>
+                <div class="col-75">
+                    <input id="id1" type="number" min="1000" max="9999" requried>
+                    <button type="button" onclick="return validatePasscode()">OK</button>
+                    <p id="passcode"></p>
+                    <script>
+                        function validatePasscode() {
+                            var inpObj = document.getElementById("id1");
+
+                            document.getElementById("passcode").innerHTML = ""
+
+                            if (inpObj.value.trim() == "") {
+                                document.getElementById("passcode").innerHTML = "Please enter a valid value.";
+                                inpObj.style = "background-color: #ff8282;";
+                            } else if (inpObj.checkValidity() == false) {
+                                document.getElementById("passcode").innerHTML = inpObj.validationMessage;
+                                inpObj.style = "background-color: #ff8282;";
+                            } else {
+                                document.getElementById("passcode").innerHTML = "Passcode Valid";
+                                inpObj.style = "background-color: #a8ffbb;";
+                            }
+                        }
+                    </script>
+                </div>
+            </div>
+
             <div class="row">
                 <input type="submit" value="Submit">
+                <input type="reset" value="Reset">
             </div>
         </form>
 
-        <p> Click on the submit button to submit the form.</p>
-
     </main>
-    <footer></footer>
+</body>
+
+</html>
+
+</main>
+<footer></footer>
 </body>
 
 </html>

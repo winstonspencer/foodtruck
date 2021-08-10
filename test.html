@@ -1,0 +1,17 @@
+<ul style="list-style: none;" class="onselect">
+    <li><i>&lt;h2&gt;Enter your four-digit passcode, then click OK:&lt;/h2&gt;</i></li>
+    <li><i>&lt;input id="id1" type="number" min="1000" max="9999"&gt;</i></li>
+    <li><i>&lt;button onclick= "myFunction()"&gt;OK&lt;/button&gt;</i></li>
+    <li><i>&lt;p id="passcode"&gt;&lt;/p&gt;</i></li>
+    <li><i>&lt;script&gt;</i></li>
+    <li><i>function myFunction() {</i></li>
+    <li><i>var inpObj = document.getElementById("id1");</i></li>
+    <li><i>if (inpObj.checkValidity() == false) {</i></li>
+    <li><i>document.getElementById("passcode").innerHTML =</i></li>
+    <li><i>inpObj.validationMessage;</i></li>
+    <li><i>} else {</i></li>
+    <li><i>document.getElementById("passcode").innerHTML = "Passcode Valid";</i></li>
+    <li><i>}</i></li>
+    <li><i>}</i></li>
+    <li><i>&lt;/script&gt;</i></li>
+</ul>
